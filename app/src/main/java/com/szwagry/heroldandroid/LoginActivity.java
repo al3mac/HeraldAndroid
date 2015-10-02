@@ -1,13 +1,11 @@
 package com.szwagry.heroldandroid;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-public class LoginActivity extends AppCompatActivity {
+import android.app.Activity;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-    }
+import org.androidannotations.annotations.EActivity;
+
+@EActivity(R.layout.activity_login)
+public class LoginActivity extends Activity{
+
 }

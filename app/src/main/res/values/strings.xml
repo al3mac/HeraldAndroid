@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HeroldAndroid</string>
+    <string name="loginNameHint">Login</string>
+    <string name="loginPasswordHint">Password</string>
+    <string name="loginButtonLabel">Login</string>
+    <string name="registerButtonLabel">Register</string>
 </resources>
