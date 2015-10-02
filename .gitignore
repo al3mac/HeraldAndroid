@@ -7,3 +7,9 @@
 /captures
 *.class
 *.iml
+.idea/
+app/proguard-rules.pro
+gradle.properties
+gradle/
+gradlew
+gradlew.bat
