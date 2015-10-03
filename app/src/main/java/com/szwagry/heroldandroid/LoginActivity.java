@@ -12,15 +12,22 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.szwagry.heroldandroid.helpers.Sha256Helper;
+import com.szwagry.heroldandroid.preferences.Preferences_;
+
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.sharedpreferences.Pref;
 
 @EActivity(R.layout.activity_login)
-public class LoginActivity extends Activity{
+public class LoginActivity extends Activity {
 
     ProgressDialog progressDialog;
+
+    @Pref
+    Preferences_ preferences;
 
     @ViewById
     EditText loginName;
@@ -32,11 +39,12 @@ public class LoginActivity extends Activity{
     @Click({R.id.loginButton})
     void onLoginButtonClick() {
 
-        if( validateInput(loginName) || validateInput(loginPassword) ){
+        if (validateInput(loginName) || validateInput(loginPassword)) {
             showToast("One of fields is empty!");
-        } else{
+
+        } else {
             publishProgress(true);
-            loginProcess(loginName, loginPassword);
+            loginProcess(loginName, loginPassword, preferences.salt().get());
         }
 
     }
@@ -48,7 +56,9 @@ public class LoginActivity extends Activity{
     }
 
     @Background
-    void loginProcess(EditText login, EditText password) {
+    void loginProcess(EditText login, EditText password, String salt) {
+
+        String hash = Sha256Helper.getHash(password.getText().toString()+salt);
 
         try {
             Thread.sleep(10000);
@@ -59,13 +69,13 @@ public class LoginActivity extends Activity{
         publishProgress(false);
     }
 
-    boolean validateInput(EditText text){
+    boolean validateInput(EditText text) {
         return isBlank(text.getText().toString().trim());
     }
 
     @UiThread
-    void showToast (String text) {
-        Toast.makeText(getApplicationContext(),text, Toast.LENGTH_LONG).show();
+    void showToast(String text) {
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
 
     @UiThread
@@ -79,14 +89,14 @@ public class LoginActivity extends Activity{
     }
 
     boolean isBlank(String str) {
-                    int strLen;
-                    if (str == null || (strLen = str.length()) == 0) {
-                            return true;
-                        }
-                    if(str == ""){
-                        return true;
-                    }
-                    return false;
-                }
+        int strLen;
+        if (str == null || (strLen = str.length()) == 0) {
+            return true;
+        }
+        if (str == "") {
+            return true;
+        }
+        return false;
+    }
 
 }
