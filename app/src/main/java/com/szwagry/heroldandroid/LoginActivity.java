@@ -4,7 +4,6 @@ package com.szwagry.heroldandroid;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.annotation.UiThread;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,6 +16,7 @@ import com.szwagry.heroldandroid.preferences.Preferences_;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.rest.RestService;
 import org.androidannotations.annotations.sharedpreferences.Pref;
@@ -46,7 +46,7 @@ public class LoginActivity extends Activity {
             showToast("One of fields is empty!");
 
         } else {
-            publishProgress(true);
+
             loginProcess(loginName, loginPassword, preferences.salt().get());
         }
 
@@ -60,7 +60,7 @@ public class LoginActivity extends Activity {
 
     @Background
     void loginProcess(EditText login, EditText password, String salt) {
-
+        publishProgress(true);
         String hash = Sha256Helper.getHash(password.getText().toString()+salt);
 
         LoginRequest loginRequest = new LoginRequest(login.getText().toString(), hash);

@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -25,6 +24,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.rest.RestService;
 import org.androidannotations.annotations.sharedpreferences.Pref;
@@ -86,6 +86,7 @@ public class AddItemFragment extends Fragment {
 
     @Background
     void processRegistration(String name, String type, String formatedData) {
+        publishProgress(true);
         heraldRestService.setHeader("Authorization", "Bearer " + preferences.token().get());
         SaveThingRequest saveThingRequest = new SaveThingRequest();
         saveThingRequest.setName(name);
@@ -97,6 +98,7 @@ public class AddItemFragment extends Fragment {
         } else {
             Log.d(LOG_TAG, "Empty id");
         }
+        publishProgress(false);
     }
 
     boolean validateInput(EditText text) {
@@ -140,6 +142,16 @@ public class AddItemFragment extends Fragment {
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+    }
+
+    @UiThread
+    void publishProgress(boolean progress) {
+        if (progress) {
+            progressDialog = ProgressDialog.show(AddItemFragment.this.getActivity(), "Logging",
+                    "Processing please wait...", true);
+        } else {
+            progressDialog.dismiss();
         }
     }
 

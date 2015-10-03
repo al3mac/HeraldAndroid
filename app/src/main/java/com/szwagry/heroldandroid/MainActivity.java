@@ -1,7 +1,7 @@
 package com.szwagry.heroldandroid;
 
 
-import android.support.annotation.UiThread;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -21,6 +21,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ItemClick;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 @EActivity(R.layout.activity_main)
@@ -50,7 +51,6 @@ public class MainActivity extends FragmentActivity {
     @UiThread
     @ItemClick({R.id.navigationList})
     void NavigationItemListClicked(NavigationItem item) {
-        Toast.makeText(this, item.getName(), Toast.LENGTH_SHORT).show();
 
         switch (item.getName()) {
             case "Item panel":
