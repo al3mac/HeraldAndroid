@@ -19,7 +19,7 @@
             android:layout_margin="10dp" />
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="ownedItemName"
@@ -30,7 +30,7 @@
             android:textColor="#ffffff" />
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="ownedItemDate"
@@ -39,5 +39,19 @@
             android:layout_column="1"
             android:layout_marginTop="10dp"
             android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="id"
+            android:id="@+id/ownedItemId"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"
+            android:textColor="#ffffff" />
+
     </GridLayout>
 </LinearLayout>

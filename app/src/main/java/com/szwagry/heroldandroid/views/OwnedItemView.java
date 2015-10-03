@@ -27,6 +27,9 @@ public class OwnedItemView extends LinearLayout {
     @ViewById
     TextView ownedItemDate;
 
+    @ViewById
+    TextView ownedItemId;
+
     public OwnedItemView(Context context) {
         super(context);
     }
@@ -35,6 +38,7 @@ public class OwnedItemView extends LinearLayout {
         ownedItemName.setText(item.getName());
         setImageView(item.getType());
         ownedItemDate.setText(item.getAddedDate());
+        ownedItemId.setText(item.getId());
     }
 
     private void setImageView(String type) {
