@@ -9,6 +9,8 @@ import android.view.Gravity;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.szwagry.heroldandroid.mainActivityFragments.AddItemFragment;
+import com.szwagry.heroldandroid.mainActivityFragments.AddItemFragment_;
 import com.szwagry.heroldandroid.mainActivityFragments.ItemPanelFragment_;
 import com.szwagry.heroldandroid.mainActivityFragments.MessageArchiveFragment_;
 import com.szwagry.heroldandroid.mainActivityFragments.MessagePanelFragment_;
@@ -27,6 +29,7 @@ public class MainActivity extends FragmentActivity {
     ItemPanelFragment_ itemPanelFragment= new ItemPanelFragment_();
     MessagePanelFragment_ messagePanelFragment= new MessagePanelFragment_();
     MessageArchiveFragment_ messageArchiveFragment= new MessageArchiveFragment_();
+    AddItemFragment_ addItemFragment = new AddItemFragment_();
 
     Fragment updateFragment;
     @ViewById
@@ -61,9 +64,13 @@ public class MainActivity extends FragmentActivity {
             case "Message archive":
                 updateFragment = messageArchiveFragment;
                 break;
+
+            case "Add Item":
+                updateFragment = addItemFragment;
+                break;
         }
 
-        drawerLayout.closeDrawer(Gravity.LEFT);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, updateFragment).commit();
+        drawerLayout.closeDrawer(Gravity.LEFT);
     }
 }
