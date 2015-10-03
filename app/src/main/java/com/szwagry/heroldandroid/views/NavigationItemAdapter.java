@@ -27,10 +27,9 @@ public class NavigationItemAdapter extends BaseAdapter {
     @AfterInject
     void initAdapter() {
         navigationItems = new ArrayList<NavigationItem>();
-        navigationItems.add(new NavigationItem("1"));
-        navigationItems.add(new NavigationItem("2"));
-        navigationItems.add(new NavigationItem("3"));
-        navigationItems.add(new NavigationItem("4"));
+        navigationItems.add(new NavigationItem("Item panel"));
+        navigationItems.add(new NavigationItem("Message panel"));
+        navigationItems.add(new NavigationItem("Message archive"));
     }
 
     @Override
