@@ -33,23 +33,23 @@ public class OwnedItemView extends LinearLayout {
 
     public void bind(OwnedItem item) {
         ownedItemName.setText(item.getName());
-//        setImageView(item.getType());
+        setImageView(item.getType());
         ownedItemDate.setText(item.getAddedDate());
     }
 
     private void setImageView(String type) {
-        String src = "";
+        int src = 0 ;
         switch (type) {
             case "Bicycle":
-                src = "";
+                src = R.drawable.bicycle;
                 break;
             case "Car":
-                src = "";
+                src = R.drawable.car;
                 break;
             case "Mobile":
-                src = "";
+                src =R.drawable.mobile;
                 break;
         }
-        ownedItemType.setImageDrawable(Drawable.createFromPath(src));
+        ownedItemType.setImageResource(src);
     }
 }
