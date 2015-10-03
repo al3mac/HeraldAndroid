@@ -26,7 +26,7 @@ public class HeraldGcmService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         super.onMessageReceived(from, data);
-        String message = data.getString("message");
+        String message = data.getString("data");
         Log.d(LOG_TAG, "From: " + from);
         Log.d(LOG_TAG, "Message: " + message);
         sendNotification(message);
@@ -40,8 +40,8 @@ public class HeraldGcmService extends GcmListenerService {
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         android.support.v4.app.NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.cast_ic_notification_0)
-                .setContentTitle("GCM Message")
+                .setSmallIcon(R.drawable.abc_ic_search_api_mtrl_alpha)
+                .setContentTitle("Herald")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
