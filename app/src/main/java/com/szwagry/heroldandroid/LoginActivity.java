@@ -5,11 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.UiThread;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.szwagry.heroldandroid.helpers.Sha256Helper;
@@ -40,8 +36,7 @@ public class LoginActivity extends Activity {
     void onLoginButtonClick() {
 
         if (validateInput(loginName) || validateInput(loginPassword)) {
-            String dlo = preferences.salt().get();
-            showToast(preferences.salt().get());
+            showToast("One of fields is empty!");
 
         } else {
             publishProgress(true);
@@ -68,6 +63,9 @@ public class LoginActivity extends Activity {
         }
 
         publishProgress(false);
+
+        Intent intent = new Intent(LoginActivity.this, MainActivity_.class);
+        startActivity(intent);
     }
 
     boolean validateInput(EditText text) {
