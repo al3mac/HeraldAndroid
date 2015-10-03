@@ -4,16 +4,8 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".LoginActivity">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/logo"
-        android:src="@drawable/logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp" />
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".LoginActivity"
+    android:background="#6c65ee">
 
     <EditText
         android:layout_width="wrap_content"
@@ -24,10 +16,12 @@
         android:layout_alignEnd="@+id/loginPassword"
         android:hint="@string/loginNameHint"
         android:textAlignment="center"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textColorHint="#ffffff"
+        android:textColor="#ffffff" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
@@ -35,10 +29,12 @@
         android:layout_below="@+id/loginName"
         android:layout_centerHorizontal="true"
         android:hint="@string/loginPasswordHint"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/loginButtonLabel"
         android:id="@+id/loginButton"
@@ -52,17 +48,31 @@
         android:text="@string/registerButtonLabel"
         android:id="@+id/loginRegisterButton"
         android:layout_below="@+id/loginButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#00ffffff"
+        android:shadowColor="#00ffffff"
+        android:textColor="#ffffff" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/loginProgressBar"
-        android:layout_below="@+id/logo"
         android:layout_alignBottom="@+id/loginPassword"
-        android:layout_alignEnd="@+id/logo"
-        android:layout_alignStart="@+id/logo"
         android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Herald"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="93dp"
+        android:textColor="#ffffff"
+        android:typeface="serif"
+        android:capitalize="characters"
+        android:textSize="56dp" />
 
 </RelativeLayout>
