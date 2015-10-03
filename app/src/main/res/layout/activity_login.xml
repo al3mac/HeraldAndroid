@@ -23,7 +23,8 @@
         android:layout_alignStart="@+id/loginPassword"
         android:layout_alignEnd="@+id/loginPassword"
         android:hint="@string/loginNameHint"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:singleLine="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -49,7 +50,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registerButtonLabel"
-        android:id="@+id/registerButton"
+        android:id="@+id/loginRegisterButton"
         android:layout_below="@+id/loginButton"
         android:layout_centerHorizontal="true" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginProgressBar"
+        android:layout_below="@+id/logo"
+        android:layout_alignBottom="@+id/loginPassword"
+        android:layout_alignEnd="@+id/logo"
+        android:layout_alignStart="@+id/logo"
+        android:visibility="invisible" />
+
 </RelativeLayout>
