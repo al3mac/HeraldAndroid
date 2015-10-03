@@ -61,12 +61,12 @@ public class LoginActivity extends Activity {
     @Background
     void loginProcess(EditText login, EditText password, String salt) {
         publishProgress(true);
-        String hash = Sha256Helper.getHash(password.getText().toString()+salt);
+        String hash = Sha256Helper.getHash(password.getText().toString() + salt);
 
         LoginRequest loginRequest = new LoginRequest(login.getText().toString(), hash);
         LoginResponse loginResponse = heraldRestService.loginUser(loginRequest);
 
-        if(loginResponse.getToken()!=null) {
+        if (loginResponse.getToken() != null) {
             preferences.token().put(loginResponse.getToken());
             preferences.username().put(login.getText().toString());
             loginDone();

@@ -1,15 +1,11 @@
 package com.szwagry.heroldandroid.views;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.szwagry.heroldandroid.http.HeraldRestService;
-import com.szwagry.heroldandroid.http.messages.GetThingsRequest;
 import com.szwagry.heroldandroid.http.messages.GetThingsResponse;
 import com.szwagry.heroldandroid.http.messages.ThingResponse;
 import com.szwagry.heroldandroid.preferences.Preferences_;
@@ -32,20 +28,17 @@ import java.util.List;
 @EBean
 public class OwnerItemAdapter extends BaseAdapter {
 
+    List<OwnedItem> ownerItemList;
+    @RootContext
+    Context context;
+    @RestService
+    HeraldRestService heraldRestService;
+    @Pref
+    Preferences_ preferences;
+
     public List<OwnedItem> getOwnerItemList() {
         return ownerItemList;
     }
-
-    List<OwnedItem> ownerItemList;
-
-    @RootContext
-    Context context;
-
-    @RestService
-    HeraldRestService heraldRestService;
-
-    @Pref
-    Preferences_ preferences;
 
     @AfterInject
     void initAdapter() {
@@ -56,7 +49,7 @@ public class OwnerItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-       OwnedItemView ownedItemView;
+        OwnedItemView ownedItemView;
         if (convertView == null) {
             ownedItemView = OwnedItemView_.build(context);
         } else {
@@ -87,7 +80,7 @@ public class OwnerItemAdapter extends BaseAdapter {
     void populate() {
         heraldRestService.setHeader("Authorization", "Bearer " + preferences.token().get());
         GetThingsResponse response = heraldRestService.getThings();
-        if(response!=null) {
+        if (response != null) {
             for (String thingsId : response.getThings()) {
                 ThingResponse thing = heraldRestService.getThing(thingsId);
                 OwnedItem ownedItem = new OwnedItem(thing);
@@ -100,6 +93,6 @@ public class OwnerItemAdapter extends BaseAdapter {
 
     @UiThread
     void refresh() {
-       this.notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 }

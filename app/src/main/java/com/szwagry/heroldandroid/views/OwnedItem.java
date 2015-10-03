@@ -2,8 +2,6 @@ package com.szwagry.heroldandroid.views;
 
 import com.szwagry.heroldandroid.http.messages.ThingResponse;
 
-import java.util.Date;
-
 /**
  * Created by ragnar on 10/3/15.
  */
@@ -62,13 +60,6 @@ public class OwnedItem {
     public void setAddedDate(String addedDate) {
         this.addedDate = addedDate;
     }
-
-
-
-
-
-
-
 
 
 }

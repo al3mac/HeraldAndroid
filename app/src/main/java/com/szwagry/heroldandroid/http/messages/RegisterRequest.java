@@ -4,6 +4,7 @@ import com.szwagry.heroldandroid.http.User;
 
 /**
  * Invoke register request
+ *
  * @author wojciechrauner
  */
 public class RegisterRequest {

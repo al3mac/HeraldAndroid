@@ -6,11 +6,11 @@ package com.szwagry.heroldandroid.views;
 public class NavigationItem {
     private String name;
 
-    public String getName(){
-        return this.name;
-    }
-
     public NavigationItem(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

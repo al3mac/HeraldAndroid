@@ -1,11 +1,8 @@
 package com.szwagry.heroldandroid;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -61,7 +58,7 @@ public class RegisterActivity extends Activity {
         RegisterRequest request = new RegisterRequest(loginName, hash);
         RegisterResponse result = heraldRestService.registerUser(request);
 
-        if(result.getUsername()!=null) {
+        if (result.getUsername() != null) {
             // if registration ok
             preferences.salt().put(salt);
             publishProgress(false);

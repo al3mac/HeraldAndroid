@@ -1,15 +1,12 @@
 package com.szwagry.heroldandroid;
 
 
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.szwagry.heroldandroid.mainActivityFragments.AddItemFragment;
 import com.szwagry.heroldandroid.mainActivityFragments.AddItemFragment_;
 import com.szwagry.heroldandroid.mainActivityFragments.ItemPanelFragment_;
 import com.szwagry.heroldandroid.mainActivityFragments.MessageArchiveFragment_;
@@ -27,9 +24,9 @@ import org.androidannotations.annotations.ViewById;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends FragmentActivity {
 
-    ItemPanelFragment_ itemPanelFragment= new ItemPanelFragment_();
-    MessagePanelFragment_ messagePanelFragment= new MessagePanelFragment_();
-    MessageArchiveFragment_ messageArchiveFragment= new MessageArchiveFragment_();
+    ItemPanelFragment_ itemPanelFragment = new ItemPanelFragment_();
+    MessagePanelFragment_ messagePanelFragment = new MessagePanelFragment_();
+    MessageArchiveFragment_ messageArchiveFragment = new MessageArchiveFragment_();
     AddItemFragment_ addItemFragment = new AddItemFragment_();
 
     Fragment updateFragment;

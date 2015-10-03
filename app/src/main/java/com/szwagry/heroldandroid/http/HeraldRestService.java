@@ -10,20 +10,18 @@ import com.szwagry.heroldandroid.http.messages.SaveThingRequest;
 import com.szwagry.heroldandroid.http.messages.SaveThingResponse;
 import com.szwagry.heroldandroid.http.messages.ThingResponse;
 
-import org.androidannotations.annotations.rest.Accept;
 import org.androidannotations.annotations.rest.Delete;
 import org.androidannotations.annotations.rest.Get;
 import org.androidannotations.annotations.rest.Post;
 import org.androidannotations.annotations.rest.Put;
 import org.androidannotations.annotations.rest.RequiresHeader;
 import org.androidannotations.annotations.rest.Rest;
-import org.androidannotations.api.rest.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 /**
  * @author wojciechrauner
  */
-@Rest(rootUrl = "http://herald-cryptosync.rhcloud.com/api", converters = { MappingJackson2HttpMessageConverter.class })
+@Rest(rootUrl = "http://herald-cryptosync.rhcloud.com/api", converters = {MappingJackson2HttpMessageConverter.class})
 public interface HeraldRestService {
 
     @Put("/user/")
@@ -49,5 +47,6 @@ public interface HeraldRestService {
     DeleteThingResponse deleteThing(String id);
 
     void setHeader(String name, String value);
+
     String getHeader(String name);
 }

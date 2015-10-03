@@ -2,6 +2,7 @@ package com.szwagry.heroldandroid.http.messages;
 
 /**
  * Server response to the register request
+ *
  * @author wojciechrauner
  */
 public class RegisterResponse {

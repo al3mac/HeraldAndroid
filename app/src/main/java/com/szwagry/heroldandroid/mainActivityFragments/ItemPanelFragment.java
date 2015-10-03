@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import com.szwagry.heroldandroid.R;
 import com.szwagry.heroldandroid.http.HeraldRestService;
-import com.szwagry.heroldandroid.http.messages.DeleteThingResponse;
 import com.szwagry.heroldandroid.preferences.Preferences_;
 import com.szwagry.heroldandroid.views.OwnedItem;
 import com.szwagry.heroldandroid.views.OwnerItemAdapter;
@@ -78,8 +77,8 @@ public class ItemPanelFragment extends Fragment {
     @Background
     void deleteItemFromServer(int pos) {
         OwnedItem ownedItem = adapter.getItem(pos);
-        if(ownedItem!=null && ownedItem.getId()!=null) {
-            heraldRestService.setHeader("Authorization", "Bearer "+preferences.token().get());
+        if (ownedItem != null && ownedItem.getId() != null) {
+            heraldRestService.setHeader("Authorization", "Bearer " + preferences.token().get());
             heraldRestService.deleteThing(ownedItem.getId());
             deleteItemFromAdapter(pos);
         } else {

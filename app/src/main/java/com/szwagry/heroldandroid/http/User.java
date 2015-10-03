@@ -2,6 +2,7 @@ package com.szwagry.heroldandroid.http;
 
 /**
  * Class that represents user of the app
+ *
  * @author wojciechrauner
  */
 public class User {

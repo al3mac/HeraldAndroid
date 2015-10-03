@@ -37,7 +37,7 @@ public class OwnedItemView extends LinearLayout {
         ownedItemDate.setText(item.getAddedDate());
     }
 
-    private void setImageView(String type){
+    private void setImageView(String type) {
         String src = "";
         switch (type) {
             case "Bicycle":
