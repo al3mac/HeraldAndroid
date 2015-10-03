@@ -11,12 +11,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.szwagry.heroldandroid.helpers.Sha256Helper;
+import com.szwagry.heroldandroid.http.HeraldRestService;
+import com.szwagry.heroldandroid.http.messages.RegisterRequest;
+import com.szwagry.heroldandroid.http.messages.RegisterResponse;
 import com.szwagry.heroldandroid.preferences.Preferences_;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.rest.RestService;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
 @EActivity(R.layout.activity_register)
@@ -32,6 +36,9 @@ public class RegisterActivity extends Activity {
 
     @ViewById
     EditText registerPassword;
+
+    @RestService
+    HeraldRestService heraldRestService;
 
     @Click({R.id.registerOkButton})
     void proceedRegistration() {
@@ -51,16 +58,22 @@ public class RegisterActivity extends Activity {
         String hash = Sha256Helper.getHash(password.getText().toString() + salt);
         String loginName = login.getText().toString();
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        RegisterRequest request = new RegisterRequest(loginName, hash);
+        RegisterResponse result = heraldRestService.registerUser(request);
+
+        if(result.getId()!=null) {
+            // if registration ok
+            preferences.salt().put(salt);
+            String salty = preferences.salt().get();
+            publishProgress(false);
+        } else {
+            //registration failed
+            publishProgress(false);
+            login.setText("");
+            password.setText("");
         }
 
-        // if registration ok
-        preferences.salt().put(salt);
-        String salty = preferences.salt().get();
-        publishProgress(false);
+
     }
 
     @UiThread
