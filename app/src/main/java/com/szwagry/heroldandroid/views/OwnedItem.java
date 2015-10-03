@@ -60,6 +60,4 @@ public class OwnedItem {
     public void setAddedDate(String addedDate) {
         this.addedDate = addedDate;
     }
-
-
 }

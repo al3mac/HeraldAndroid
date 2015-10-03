@@ -8,6 +8,8 @@ import com.szwagry.heroldandroid.http.messages.RegisterRequest;
 import com.szwagry.heroldandroid.http.messages.RegisterResponse;
 import com.szwagry.heroldandroid.http.messages.SaveThingRequest;
 import com.szwagry.heroldandroid.http.messages.SaveThingResponse;
+import com.szwagry.heroldandroid.http.messages.SaveTokenRequest;
+import com.szwagry.heroldandroid.http.messages.SaveTokenResponse;
 import com.szwagry.heroldandroid.http.messages.ThingResponse;
 
 import org.androidannotations.annotations.rest.Delete;
@@ -46,6 +48,10 @@ public interface HeraldRestService extends RestClientErrorHandling {
     @Delete("/things/{id}")
     @RequiresHeader("Authorization")
     DeleteThingResponse deleteThing(String id);
+
+    @Post("/user/token")
+    @RequiresHeader("Authorization")
+    SaveTokenResponse saveToken(SaveTokenRequest saveTokenRequest);
 
     void setHeader(String name, String value);
 
