@@ -76,11 +76,12 @@ public class OwnerItemAdapter extends BaseAdapter {
     void getListItems() {
         heraldRestService.setHeader("Authorization", "Bearer "+preferences.token().get());
         GetThingsResponse response = heraldRestService.getThings();
-        Log.d(LOG_TAG, "Downloaded " + response.getThings().size() + "items from server");
-        for(String thingsId : response.getThings()) {
-            ThingResponse thing = heraldRestService.getThing(thingsId);
-            OwnedItem ownedItem = new OwnedItem(thing);
-            ownerItemList.add(ownedItem);
+        if(response!=null) {
+            for(String thingsId : response.getThings()) {
+                ThingResponse thing = heraldRestService.getThing(thingsId);
+                OwnedItem ownedItem = new OwnedItem(thing);
+                ownerItemList.add(ownedItem);
+            }
         }
     }
 
