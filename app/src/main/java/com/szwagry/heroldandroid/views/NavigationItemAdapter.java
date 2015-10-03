@@ -28,6 +28,7 @@ public class NavigationItemAdapter extends BaseAdapter {
     void initAdapter() {
         navigationItems = new ArrayList<NavigationItem>();
         navigationItems.add(new NavigationItem("Item panel"));
+        navigationItems.add(new NavigationItem("Add Item"));
         navigationItems.add(new NavigationItem("Message panel"));
         navigationItems.add(new NavigationItem("Message archive"));
     }
@@ -35,16 +36,16 @@ public class NavigationItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        NavigationItemView personItemView;
+        NavigationItemView navigationItemView;
         if (convertView == null) {
-            personItemView = NavigationItemView_.build(context);
+            navigationItemView = NavigationItemView_.build(context);
         } else {
-            personItemView = (NavigationItemView) convertView;
+            navigationItemView = (NavigationItemView) convertView;
         }
 
-        personItemView.bind(getItem(position));
+        navigationItemView.bind(getItem(position));
 
-        return personItemView;
+        return navigationItemView;
     }
 
     @Override
