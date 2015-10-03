@@ -1,34 +1,13 @@
-package com.szwagry.heroldandroid.views;
-
-import com.szwagry.heroldandroid.http.messages.ThingResponse;
-
-import java.util.Date;
+package com.szwagry.heroldandroid.http.messages;
 
 /**
- * Created by ragnar on 10/3/15.
+ * @author wojciechrauner
  */
-public class OwnedItem {
+public class ThingResponse {
     private String id;
     private String name;
     private String type;
     private String addedDate;
-
-    public OwnedItem(String id, String name, String type, String addedDate) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.addedDate = addedDate;
-    }
-
-    public OwnedItem(ThingResponse response) {
-        this.id = response.getId();
-        this.name = response.getName();
-        this.type = response.getType();
-        this.addedDate = response.getAddedDate();
-    }
-
-    public OwnedItem() {
-    }
 
     public String getId() {
         return id;
@@ -55,20 +34,10 @@ public class OwnedItem {
     }
 
     public String getAddedDate() {
-
         return addedDate;
     }
 
     public void setAddedDate(String addedDate) {
         this.addedDate = addedDate;
     }
-
-
-
-
-
-
-
-
-
 }
