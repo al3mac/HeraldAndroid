@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,12 +16,18 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.szwagry.heroldandroid.R;
+import com.szwagry.heroldandroid.http.HeraldRestService;
+import com.szwagry.heroldandroid.http.messages.SaveThingRequest;
+import com.szwagry.heroldandroid.http.messages.SaveThingResponse;
+import com.szwagry.heroldandroid.preferences.Preferences_;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.rest.RestService;
+import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,6 +40,7 @@ import java.util.List;
 
 @EFragment(R.layout.fragment_add_item)
 public class AddItemFragment extends Fragment {
+    public static final String LOG_TAG = "AddItemFragment";
 
     ProgressDialog progressDialog;
     @ViewById
@@ -43,6 +51,12 @@ public class AddItemFragment extends Fragment {
 
     @ViewById
     Button registerOwnedItemButton;
+
+    @RestService
+    HeraldRestService heraldRestService;
+
+    @Pref
+    Preferences_ preferences;
 
     @AfterViews
     public void setupViews(){
@@ -72,9 +86,17 @@ public class AddItemFragment extends Fragment {
 
     @Background
     void processRegistration(String name, String type, String formatedData) {
-
-        createAndSaveImageFromText("trolololo");
-
+        heraldRestService.setHeader("Authorization", "Bearer " + preferences.token().get());
+        SaveThingRequest saveThingRequest = new SaveThingRequest();
+        saveThingRequest.setName(name);
+        saveThingRequest.setType(type);
+        saveThingRequest.setAddedDate(formatedData);
+        SaveThingResponse response = heraldRestService.saveThing(saveThingRequest);
+        if(response.getId()!=null) {
+            createAndSaveImageFromText(response.getId());
+        } else {
+            Log.d(LOG_TAG, "Empty id");
+        }
     }
 
     boolean validateInput(EditText text) {

@@ -74,7 +74,7 @@ public class OwnerItemAdapter extends BaseAdapter {
 
     @Background
     void getListItems() {
-        heraldRestService.setHeader("Authorization", "Bearer "+preferences.token());
+        heraldRestService.setHeader("Authorization", "Bearer "+preferences.token().get());
         GetThingsResponse response = heraldRestService.getThings();
         Log.d(LOG_TAG, "Downloaded " + response.getThings().size() + "items from server");
         for(String thingsId : response.getThings()) {

@@ -19,7 +19,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 /**
  * @author wojciechrauner
  */
-@Rest(rootUrl = "http://herald-cryptosync.rhcloud.com/api", converters = { MappingJackson2HttpMessageConverter.class })
+@Rest(rootUrl = "http://172.27.1.83:3000/api", converters = { MappingJackson2HttpMessageConverter.class })
 public interface HeraldRestService {
 
     @Put("/user/")
