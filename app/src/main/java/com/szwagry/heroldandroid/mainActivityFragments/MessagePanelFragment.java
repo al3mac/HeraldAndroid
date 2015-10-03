@@ -18,10 +18,6 @@ import com.orhanobut.dialogplus.GridHolder;
 import com.orhanobut.dialogplus.ListHolder;
 import com.orhanobut.dialogplus.OnItemClickListener;
 import com.szwagry.heroldandroid.R;
-import com.szwagry.heroldandroid.http.HeraldRestService;
-import com.szwagry.heroldandroid.http.messages.SendMessageRequest;
-import com.szwagry.heroldandroid.http.messages.SendMessageResponse;
-import com.szwagry.heroldandroid.preferences.Preferences_;
 import com.szwagry.heroldandroid.views.ListItemAdapter;
 
 import org.androidannotations.annotations.Background;
@@ -30,8 +26,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.rest.RestService;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 
 
 @EFragment(R.layout.fragment_message_panel)
@@ -46,12 +40,6 @@ public class MessagePanelFragment extends Fragment {
 
     @ViewById(R.id.messageText)
     EditText messageText;
-
-    @RestService
-    HeraldRestService heraldRestService;
-
-    @Pref
-    Preferences_ preferences;
 
     @Click(R.id.tagInformationButton)
     void getTagInformation(){
@@ -120,12 +108,7 @@ public class MessagePanelFragment extends Fragment {
     }
 
     private void processSendMessage(String message, String ownedItemId) {
-        showToast("Message sent! " + message + " to " + ownedItemId);
-        heraldRestService.setHeader("Authorization", "Bearer " + preferences.token().get());
-        SendMessageResponse sendMessageResponse = heraldRestService.sendMessage(new SendMessageRequest(ownedItemId, message));
-        if(sendMessageResponse!=null && "true".equals(sendMessageResponse.getSend())) {
-            showToast("Message sent");
-        }
+        showToast("Message sent! "+message+" to "+ownedItemId);
     }
 
     @UiThread
