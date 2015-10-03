@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.szwagry.heroldandroid.R;
+
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
@@ -27,10 +29,9 @@ public class NavigationItemAdapter extends BaseAdapter {
     @AfterInject
     void initAdapter() {
         navigationItems = new ArrayList<NavigationItem>();
-        navigationItems.add(new NavigationItem("Item panel"));
-        navigationItems.add(new NavigationItem("Add Item"));
-        navigationItems.add(new NavigationItem("Message panel"));
-        navigationItems.add(new NavigationItem("Message archive"));
+        navigationItems.add(new NavigationItem("Item panel", android.R.drawable.ic_menu_myplaces));
+        navigationItems.add(new NavigationItem("Add item", android.R.drawable.ic_input_add));
+        navigationItems.add(new NavigationItem("Send message", android.R.drawable.ic_menu_send));
     }
 
     @Override

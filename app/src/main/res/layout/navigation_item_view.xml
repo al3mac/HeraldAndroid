@@ -9,8 +9,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
-            android:src="@android:drawable/ic_btn_speak_now"
+            android:id="@+id/navigationItemIcon"
             android:layout_column="0"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp" />
