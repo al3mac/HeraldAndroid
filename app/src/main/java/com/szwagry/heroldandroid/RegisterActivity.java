@@ -100,7 +100,8 @@ public class RegisterActivity extends Activity {
 
     @UiThread
     void registrationDone() {
-        showToast("Registered");
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity_.class);
+        startActivity(intent);
     }
 
     boolean validateInput(EditText text) {
