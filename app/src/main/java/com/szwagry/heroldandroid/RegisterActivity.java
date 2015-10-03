@@ -69,7 +69,7 @@ public class RegisterActivity extends Activity {
         RegisterRequest request = new RegisterRequest(loginName, hash);
         RegisterResponse result = heraldRestService.registerUser(request);
 
-        if (result.getUsername() != null) {
+        if (result!=null && result.getUsername() != null) {
             // if registration ok
             preferences.salt().put(salt);
             publishProgress(false);
@@ -79,6 +79,7 @@ public class RegisterActivity extends Activity {
             publishProgress(false);
             login.setText("");
             password.setText("");
+            showToast("Login failed");
         }
 
     }
