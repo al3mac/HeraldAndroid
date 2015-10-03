@@ -61,11 +61,12 @@ public class RegisterActivity extends Activity {
         RegisterRequest request = new RegisterRequest(loginName, hash);
         RegisterResponse result = heraldRestService.registerUser(request);
 
-        if(result.getId()!=null) {
+        if(result.getUsername()!=null) {
             // if registration ok
             preferences.salt().put(salt);
-            String salty = preferences.salt().get();
+            preferences.username().put(loginName);
             publishProgress(false);
+            registrationDone();
         } else {
             //registration failed
             publishProgress(false);
@@ -95,6 +96,11 @@ public class RegisterActivity extends Activity {
         } else {
             progressDialog.dismiss();
         }
+    }
+
+    @UiThread
+    void registrationDone() {
+        showToast("Registered");
     }
 
     boolean validateInput(EditText text) {

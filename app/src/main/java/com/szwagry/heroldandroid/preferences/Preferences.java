@@ -13,4 +13,6 @@ public interface Preferences {
     @DefaultString("ohmygodnovalue:(")
     String salt();
 
+    String username();
+
 }
