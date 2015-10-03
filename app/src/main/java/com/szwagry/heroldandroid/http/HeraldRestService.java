@@ -10,6 +10,8 @@ import com.szwagry.heroldandroid.http.messages.SaveThingRequest;
 import com.szwagry.heroldandroid.http.messages.SaveThingResponse;
 import com.szwagry.heroldandroid.http.messages.SaveTokenRequest;
 import com.szwagry.heroldandroid.http.messages.SaveTokenResponse;
+import com.szwagry.heroldandroid.http.messages.SendMessageRequest;
+import com.szwagry.heroldandroid.http.messages.SendMessageResponse;
 import com.szwagry.heroldandroid.http.messages.ThingResponse;
 
 import org.androidannotations.annotations.rest.Delete;
@@ -52,6 +54,10 @@ public interface HeraldRestService extends RestClientErrorHandling {
     @Post("/user/token")
     @RequiresHeader("Authorization")
     SaveTokenResponse saveToken(SaveTokenRequest saveTokenRequest);
+
+    @Post("/api/messages")
+    @RequiresHeader("Authorization")
+    SendMessageResponse sendMessage(SendMessageRequest sendMessageRequest);
 
     void setHeader(String name, String value);
 

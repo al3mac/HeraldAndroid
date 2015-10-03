@@ -10,6 +10,7 @@ public class OwnedItem {
     private String name;
     private String type;
     private String addedDate;
+    private String username;
 
     public OwnedItem(String id, String name, String type, String addedDate) {
         this.id = id;
@@ -23,6 +24,7 @@ public class OwnedItem {
         this.name = response.getName();
         this.type = response.getType();
         this.addedDate = response.getAddedDate();
+        this.username = response.getUsername();
     }
 
     public OwnedItem() {
@@ -59,5 +61,13 @@ public class OwnedItem {
 
     public void setAddedDate(String addedDate) {
         this.addedDate = addedDate;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

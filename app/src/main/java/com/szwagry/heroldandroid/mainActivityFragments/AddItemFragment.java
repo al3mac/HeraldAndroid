@@ -102,6 +102,7 @@ public class AddItemFragment extends Fragment {
         saveThingRequest.setName(name);
         saveThingRequest.setType(type);
         saveThingRequest.setAddedDate(formatedData);
+        saveThingRequest.setUsername(preferences.username().get());
         SaveThingResponse response = heraldRestService.saveThing(saveThingRequest);
         if (response.getId() != null) {
             createAndSaveImageFromText(response.getId());
