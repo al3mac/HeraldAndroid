@@ -7,6 +7,11 @@ public class SendMessageRequest {
     private String id;
     private String message;
 
+    public SendMessageRequest(String id, String message) {
+        this.id = id;
+        this.message = message;
+    }
+
     public String getId() {
         return id;
     }

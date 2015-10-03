@@ -27,7 +27,6 @@ public class MainActivity extends FragmentActivity {
 
     ItemPanelFragment_ itemPanelFragment = new ItemPanelFragment_();
     MessagePanelFragment_ messagePanelFragment = new MessagePanelFragment_();
-    MessageArchiveFragment_ messageArchiveFragment = new MessageArchiveFragment_();
     AddItemFragment_ addItemFragment = new AddItemFragment_();
 
     Fragment updateFragment;
@@ -58,10 +57,6 @@ public class MainActivity extends FragmentActivity {
 
             case "Message panel":
                 updateFragment = messagePanelFragment;
-                break;
-
-            case "Message archive":
-                updateFragment = messageArchiveFragment;
                 break;
 
             case "Add Item":
