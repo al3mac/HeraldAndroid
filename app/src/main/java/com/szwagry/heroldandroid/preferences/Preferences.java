@@ -15,4 +15,6 @@ public interface Preferences {
 
     String username();
 
+    String token();
+
 }

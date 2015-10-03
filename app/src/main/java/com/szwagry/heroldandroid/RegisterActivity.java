@@ -64,7 +64,6 @@ public class RegisterActivity extends Activity {
         if(result.getUsername()!=null) {
             // if registration ok
             preferences.salt().put(salt);
-            preferences.username().put(loginName);
             publishProgress(false);
             registrationDone();
         } else {
