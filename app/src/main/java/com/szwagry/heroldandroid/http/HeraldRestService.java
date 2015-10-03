@@ -1,5 +1,6 @@
 package com.szwagry.heroldandroid.http;
 
+import com.szwagry.heroldandroid.http.messages.DeleteThingResponse;
 import com.szwagry.heroldandroid.http.messages.GetThingsResponse;
 import com.szwagry.heroldandroid.http.messages.LoginRequest;
 import com.szwagry.heroldandroid.http.messages.LoginResponse;
@@ -9,11 +10,14 @@ import com.szwagry.heroldandroid.http.messages.SaveThingRequest;
 import com.szwagry.heroldandroid.http.messages.SaveThingResponse;
 import com.szwagry.heroldandroid.http.messages.ThingResponse;
 
+import org.androidannotations.annotations.rest.Accept;
+import org.androidannotations.annotations.rest.Delete;
 import org.androidannotations.annotations.rest.Get;
 import org.androidannotations.annotations.rest.Post;
 import org.androidannotations.annotations.rest.Put;
 import org.androidannotations.annotations.rest.RequiresHeader;
 import org.androidannotations.annotations.rest.Rest;
+import org.androidannotations.api.rest.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 /**
@@ -39,6 +43,10 @@ public interface HeraldRestService {
     @Put("/things/")
     @RequiresHeader("Authorization")
     SaveThingResponse saveThing(SaveThingRequest request);
+
+    @Delete("/things/{id}")
+    @RequiresHeader("Authorization")
+    DeleteThingResponse deleteThing(String id);
 
     void setHeader(String name, String value);
     String getHeader(String name);
