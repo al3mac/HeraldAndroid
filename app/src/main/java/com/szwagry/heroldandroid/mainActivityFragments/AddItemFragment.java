@@ -15,13 +15,16 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.szwagry.heroldandroid.R;
+import com.szwagry.heroldandroid.http.HeraldRestErrorHandler;
 import com.szwagry.heroldandroid.http.HeraldRestService;
 import com.szwagry.heroldandroid.http.messages.SaveThingRequest;
 import com.szwagry.heroldandroid.http.messages.SaveThingResponse;
 import com.szwagry.heroldandroid.preferences.Preferences_;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
@@ -53,6 +56,14 @@ public class AddItemFragment extends Fragment {
 
     @RestService
     HeraldRestService heraldRestService;
+
+    @Bean
+    HeraldRestErrorHandler heraldRestErrorHandler;
+
+    @AfterInject
+    void afterInject() {
+        heraldRestService.setRestErrorHandler(heraldRestErrorHandler);
+    }
 
     @Pref
     Preferences_ preferences;

@@ -8,12 +8,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.szwagry.heroldandroid.helpers.Sha256Helper;
+import com.szwagry.heroldandroid.http.HeraldRestErrorHandler;
 import com.szwagry.heroldandroid.http.HeraldRestService;
 import com.szwagry.heroldandroid.http.messages.LoginRequest;
 import com.szwagry.heroldandroid.http.messages.LoginResponse;
 import com.szwagry.heroldandroid.preferences.Preferences_;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
@@ -38,6 +41,13 @@ public class LoginActivity extends Activity {
     @ViewById
     EditText loginPassword;
 
+    @Bean
+    HeraldRestErrorHandler heraldRestErrorHandler;
+
+    @AfterInject
+    void afterInject() {
+        heraldRestService.setRestErrorHandler(heraldRestErrorHandler);
+    }
 
     @Click({R.id.loginButton})
     void onLoginButtonClick() {
@@ -65,13 +75,15 @@ public class LoginActivity extends Activity {
 
         LoginRequest loginRequest = new LoginRequest(login.getText().toString(), hash);
         LoginResponse loginResponse = heraldRestService.loginUser(loginRequest);
+        if (loginResponse != null) {
+            if (loginResponse.getToken() != null) {
+                preferences.token().put(loginResponse.getToken());
+                preferences.username().put(login.getText().toString());
+                loginDone();
+            } else {
+                //login unsuccessful, do sth here
 
-        if (loginResponse.getToken() != null) {
-            preferences.token().put(loginResponse.getToken());
-            preferences.username().put(login.getText().toString());
-            loginDone();
-        } else {
-            //login unsuccessful, do sth here
+            }
         }
         publishProgress(false);
     }

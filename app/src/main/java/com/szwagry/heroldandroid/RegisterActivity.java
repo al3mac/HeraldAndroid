@@ -7,12 +7,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.szwagry.heroldandroid.helpers.Sha256Helper;
+import com.szwagry.heroldandroid.http.HeraldRestErrorHandler;
 import com.szwagry.heroldandroid.http.HeraldRestService;
 import com.szwagry.heroldandroid.http.messages.RegisterRequest;
 import com.szwagry.heroldandroid.http.messages.RegisterResponse;
 import com.szwagry.heroldandroid.preferences.Preferences_;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
@@ -36,6 +39,14 @@ public class RegisterActivity extends Activity {
 
     @RestService
     HeraldRestService heraldRestService;
+
+    @Bean
+    HeraldRestErrorHandler heraldRestErrorHandler;
+
+    @AfterInject
+    void afterInject() {
+        heraldRestService.setRestErrorHandler(heraldRestErrorHandler);
+    }
 
     @Click({R.id.registerOkButton})
     void proceedRegistration() {
@@ -69,7 +80,6 @@ public class RegisterActivity extends Activity {
             login.setText("");
             password.setText("");
         }
-
 
     }
 

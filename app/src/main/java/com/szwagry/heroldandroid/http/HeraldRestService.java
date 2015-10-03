@@ -16,13 +16,14 @@ import org.androidannotations.annotations.rest.Post;
 import org.androidannotations.annotations.rest.Put;
 import org.androidannotations.annotations.rest.RequiresHeader;
 import org.androidannotations.annotations.rest.Rest;
+import org.androidannotations.api.rest.RestClientErrorHandling;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 /**
  * @author wojciechrauner
  */
 @Rest(rootUrl = "http://herald-cryptosync.rhcloud.com/api", converters = {MappingJackson2HttpMessageConverter.class})
-public interface HeraldRestService {
+public interface HeraldRestService extends RestClientErrorHandling {
 
     @Put("/user/")
     RegisterResponse registerUser(RegisterRequest registerRequest);

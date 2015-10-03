@@ -9,11 +9,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.szwagry.heroldandroid.R;
+import com.szwagry.heroldandroid.http.HeraldRestErrorHandler;
 import com.szwagry.heroldandroid.http.HeraldRestService;
 import com.szwagry.heroldandroid.preferences.Preferences_;
 import com.szwagry.heroldandroid.views.OwnedItem;
 import com.szwagry.heroldandroid.views.OwnerItemAdapter;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
@@ -36,6 +38,14 @@ public class ItemPanelFragment extends Fragment {
 
     @Bean
     OwnerItemAdapter adapter;
+
+    @Bean
+    HeraldRestErrorHandler heraldRestErrorHandler;
+
+    @AfterInject
+    void afterInject() {
+        heraldRestService.setRestErrorHandler(heraldRestErrorHandler);
+    }
 
     @AfterViews
     void bindAdapter() {
