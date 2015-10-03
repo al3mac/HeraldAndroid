@@ -8,8 +8,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ListView;
 
-import com.ikimuhendis.ldrawer.ActionBarDrawerToggle;
-import com.ikimuhendis.ldrawer.DrawerArrowDrawable;
 import com.szwagry.heroldandroid.mainActivityFragments.AddItemFragment_;
 import com.szwagry.heroldandroid.mainActivityFragments.ItemPanelFragment_;
 import com.szwagry.heroldandroid.mainActivityFragments.MessageArchiveFragment_;
