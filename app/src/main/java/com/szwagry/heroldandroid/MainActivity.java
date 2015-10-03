@@ -5,8 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.ListView;
 
+import com.ikimuhendis.ldrawer.ActionBarDrawerToggle;
+import com.ikimuhendis.ldrawer.DrawerArrowDrawable;
 import com.szwagry.heroldandroid.mainActivityFragments.AddItemFragment_;
 import com.szwagry.heroldandroid.mainActivityFragments.ItemPanelFragment_;
 import com.szwagry.heroldandroid.mainActivityFragments.MessageArchiveFragment_;
@@ -32,6 +35,11 @@ public class MainActivity extends FragmentActivity {
     Fragment updateFragment;
     @ViewById
     DrawerLayout drawerLayout;
+    @ViewById
+    ActionBarDrawerToggle drawerToggle;
+    @ViewById
+    DrawerArrowDrawable drawerArrow;
+    boolean drawerArrowColor;
 
     @ViewById
     ListView navigationList;
@@ -41,6 +49,31 @@ public class MainActivity extends FragmentActivity {
 
     @AfterViews
     void bindAdapter() {
+        drawerArrow = new DrawerArrowDrawable(this) {
+            @Override
+            public boolean isLayoutRtl() {
+                return false;
+            }
+        };
+
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
+                drawerArrow, R.string.drawer_open,
+                R.string.drawer_close) {
+
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+            }
+        };
+        drawerLayout.setDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+
         navigationList.setAdapter(adapter);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, itemPanelFragment).commit();
     }

@@ -3,12 +3,22 @@ package com.szwagry.heroldandroid.mainActivityFragments;
 
 import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
+
+import android.view.Gravity;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.GridHolder;
+import com.orhanobut.dialogplus.ListHolder;
+import com.orhanobut.dialogplus.OnItemClickListener;
 import com.szwagry.heroldandroid.R;
+import com.szwagry.heroldandroid.views.ListItemAdapter;
 
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
@@ -21,12 +31,28 @@ public class MessagePanelFragment extends Fragment {
 
     String ownedItemId;
 
+    @Bean
+    ListItemAdapter adapter;
+
     @ViewById(R.id.messageText)
     EditText messageText;
 
     @Click(R.id.tagInformationButton)
     void getTagInformation(){
 
+        DialogPlus dialog = DialogPlus.newDialog(MessagePanelFragment.this.getActivity())
+                .setAdapter(adapter)
+                .setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(DialogPlus dialog, Object item, View view, int position) {
+                        dialog.dismiss();
+                    }
+                })
+                .setContentHolder(new ListHolder())
+                .setGravity(Gravity.CENTER)
+                .setExpanded(true)  // This will enable the expand feature, (similar to android L share dialog)
+                .create();
+        dialog.show();
     }
 
     @Click(R.id.messageSend)
