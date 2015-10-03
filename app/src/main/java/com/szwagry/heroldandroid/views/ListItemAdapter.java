@@ -29,8 +29,8 @@ public class ListItemAdapter extends BaseAdapter {
     @AfterInject
     void initAdapter() {
         listItems = new ArrayList<ListItem>();
-        listItems.add(new ListItem("String", R.drawable.nfc));
-        listItems.add(new ListItem("QR Code",R.drawable.nfc));
+        listItems.add(new ListItem("String", R.drawable.s));
+        listItems.add(new ListItem("QR Code",R.drawable.wr));
         listItems.add(new ListItem("NFC",R.drawable.nfc));
     }
 

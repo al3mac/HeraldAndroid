@@ -20,6 +20,7 @@ import com.szwagry.heroldandroid.http.HeraldRestService;
 import com.szwagry.heroldandroid.http.messages.SaveThingRequest;
 import com.szwagry.heroldandroid.http.messages.SaveThingResponse;
 import com.szwagry.heroldandroid.preferences.Preferences_;
+import com.szwagry.heroldandroid.views.SpinnerItemAdapter;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -65,18 +66,14 @@ public class AddItemFragment extends Fragment {
         heraldRestService.setRestErrorHandler(heraldRestErrorHandler);
     }
 
+    @Bean
+    SpinnerItemAdapter adapter;
+
     @Pref
     Preferences_ preferences;
 
     @AfterViews
     public void setupViews() {
-        List<String> itemTypes = new ArrayList<String>();
-        itemTypes.add("Bicycle");
-        itemTypes.add("Car");
-        itemTypes.add("Mobile");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (AddItemFragment.this.getActivity(), android.R.layout.simple_spinner_item, itemTypes);
         spinnerItemTypes.setAdapter(adapter);
     }
 
