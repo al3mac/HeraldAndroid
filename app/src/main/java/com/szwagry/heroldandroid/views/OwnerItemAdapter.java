@@ -1,6 +1,8 @@
 package com.szwagry.heroldandroid.views;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.support.annotation.UiThread;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +37,6 @@ public class OwnerItemAdapter extends BaseAdapter {
         return ownerItemList;
     }
 
-
     List<OwnedItem> ownerItemList;
 
     @RootContext
@@ -54,7 +55,7 @@ public class OwnerItemAdapter extends BaseAdapter {
         ownerItemList.add(new OwnedItem("2", "Rower 2", "Bicycle", "01-10-2015"));
         ownerItemList.add(new OwnedItem("3", "Samochod", "Car", "01-10-2015"));
         ownerItemList.add(new OwnedItem("4", "iPhone", "Mobile", "01-10-2015"));
-        getListItems();
+        new LongOperation(this, heraldRestService, preferences).execute();
     }
 
     @Override
@@ -72,19 +73,6 @@ public class OwnerItemAdapter extends BaseAdapter {
         return ownedItemView;
     }
 
-    @Background
-    void getListItems() {
-        heraldRestService.setHeader("Authorization", "Bearer "+preferences.token().get());
-        GetThingsResponse response = heraldRestService.getThings();
-        if(response!=null) {
-            for(String thingsId : response.getThings()) {
-                ThingResponse thing = heraldRestService.getThing(thingsId);
-                OwnedItem ownedItem = new OwnedItem(thing);
-                ownerItemList.add(ownedItem);
-            }
-        }
-    }
-
     @Override
     public int getCount() {
         return ownerItemList.size();
@@ -98,5 +86,47 @@ public class OwnerItemAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+}
+
+
+ class LongOperation extends AsyncTask<String, Void, String> {
+
+    public LongOperation(OwnerItemAdapter ownerItemAdapter, HeraldRestService heraldRestService,Preferences_ preferences){
+        this.ownerItemAdapter = ownerItemAdapter;
+        this.heraldRestService = heraldRestService;
+        this.preferences = preferences;
+
+    }
+     HeraldRestService heraldRestService;
+     OwnerItemAdapter ownerItemAdapter;
+     Preferences_ preferences;
+
+
+    @Override
+    protected String doInBackground(String... params) {
+        heraldRestService.setHeader("Authorization", "Bearer " + preferences.token().get());
+        GetThingsResponse response = heraldRestService.getThings();
+        if(response!=null) {
+            for(String thingsId : response.getThings()) {
+                ThingResponse thing = heraldRestService.getThing(thingsId);
+                OwnedItem ownedItem = new OwnedItem(thing);
+                ownerItemAdapter.getOwnerItemList().add(ownedItem);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        ownerItemAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPreExecute() {
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
     }
 }
