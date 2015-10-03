@@ -52,14 +52,14 @@ public class RegisterActivity extends Activity {
         String loginName = login.getText().toString();
 
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         // if registration ok
         preferences.salt().put(salt);
-
+        String salty = preferences.salt().get();
         publishProgress(false);
     }
 

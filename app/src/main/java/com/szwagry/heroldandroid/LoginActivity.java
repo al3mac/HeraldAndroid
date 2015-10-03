@@ -40,7 +40,8 @@ public class LoginActivity extends Activity {
     void onLoginButtonClick() {
 
         if (validateInput(loginName) || validateInput(loginPassword)) {
-            showToast("One of fields is empty!");
+            String dlo = preferences.salt().get();
+            showToast(preferences.salt().get());
 
         } else {
             publishProgress(true);
@@ -61,7 +62,7 @@ public class LoginActivity extends Activity {
         String hash = Sha256Helper.getHash(password.getText().toString()+salt);
 
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
