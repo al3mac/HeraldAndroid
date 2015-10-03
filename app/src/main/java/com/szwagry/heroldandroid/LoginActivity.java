@@ -4,15 +4,19 @@ package com.szwagry.heroldandroid;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.szwagry.heroldandroid.helpers.Sha256Helper;
 import com.szwagry.heroldandroid.http.HeraldRestErrorHandler;
 import com.szwagry.heroldandroid.http.HeraldRestService;
 import com.szwagry.heroldandroid.http.messages.LoginRequest;
 import com.szwagry.heroldandroid.http.messages.LoginResponse;
 import com.szwagry.heroldandroid.preferences.Preferences_;
+import com.szwagry.heroldandroid.services.RegistrationIntentService_;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Background;
@@ -26,6 +30,8 @@ import org.androidannotations.annotations.sharedpreferences.Pref;
 
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends Activity {
+
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     ProgressDialog progressDialog;
 
@@ -111,6 +117,9 @@ public class LoginActivity extends Activity {
     void loginDone() {
         Intent intent = new Intent(LoginActivity.this, MainActivity_.class);
         startActivity(intent);
+        if(checkPlayServices()) {
+            RegistrationIntentService_.intent(getApplication()).start();
+        }
     }
 
     boolean isBlank(String str) {
@@ -122,6 +131,23 @@ public class LoginActivity extends Activity {
             return true;
         }
         return false;
+    }
+
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.i("LoginActivity", "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 
 }
