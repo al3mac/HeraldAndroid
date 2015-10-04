@@ -55,7 +55,7 @@ public interface HeraldRestService extends RestClientErrorHandling {
     @RequiresHeader("Authorization")
     SaveTokenResponse saveToken(SaveTokenRequest saveTokenRequest);
 
-    @Post("/api/messages")
+    @Post("/messages")
     @RequiresHeader("Authorization")
     SendMessageResponse sendMessage(SendMessageRequest sendMessageRequest);
 
