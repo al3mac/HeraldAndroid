@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#6c65ee">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="My items"
+        android:id="@+id/textView3"
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:layout_margin="10dp"
+        android:textSize="30dp" />
 
     <ListView
         android:layout_width="match_parent"
@@ -9,4 +21,5 @@
         android:id="@+id/ownedItemList"
         android:layout_gravity="center_horizontal"
         android:background="#6c65ee" />
+
 </LinearLayout>

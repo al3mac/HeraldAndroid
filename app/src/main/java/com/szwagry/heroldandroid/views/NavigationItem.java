@@ -5,9 +5,15 @@ package com.szwagry.heroldandroid.views;
  */
 public class NavigationItem {
     private String name;
+    private int src;
 
-    public NavigationItem(String name) {
+    public int getSrc() {
+        return src;
+    }
+
+    public NavigationItem(String name, int src) {
         this.name = name;
+        this.src = src;
     }
 
     public String getName() {

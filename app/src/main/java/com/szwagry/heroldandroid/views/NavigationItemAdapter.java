@@ -27,10 +27,9 @@ public class NavigationItemAdapter extends BaseAdapter {
     @AfterInject
     void initAdapter() {
         navigationItems = new ArrayList<NavigationItem>();
-        navigationItems.add(new NavigationItem("Item panel"));
-        navigationItems.add(new NavigationItem("Add Item"));
-        navigationItems.add(new NavigationItem("Message panel"));
-        navigationItems.add(new NavigationItem("Message archive"));
+        navigationItems.add(new NavigationItem("Item panel", android.R.drawable.ic_menu_myplaces));
+        navigationItems.add(new NavigationItem("Add Item", android.R.drawable.ic_input_add));
+        navigationItems.add(new NavigationItem("Message panel", android.R.drawable.ic_menu_send));
     }
 
     @Override

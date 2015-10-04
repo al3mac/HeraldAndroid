@@ -79,7 +79,7 @@ public class AddItemFragment extends Fragment {
 
     @Click({R.id.registerOwnedItemButton})
     public void registerOwnedItem() {
-        String type = spinnerItemTypes.getSelectedItem().toString();
+        String type = getSpinnerType();
         String name = registerItemName.getText().toString();
 
         Date addedDate = new Date();
@@ -88,6 +88,17 @@ public class AddItemFragment extends Fragment {
             showToast("Name is empty!");
         } else {
             processRegistration(name, type, formatedData);
+        }
+    }
+
+    private String getSpinnerType() {
+        int pos = spinnerItemTypes.getSelectedItemPosition();
+        if(pos == 0){
+            return "Bicycle";
+        } else if(pos == 1){
+            return "Car";
+        } else{
+            return "Mobile";
         }
     }
 
@@ -103,10 +114,16 @@ public class AddItemFragment extends Fragment {
         SaveThingResponse response = heraldRestService.saveThing(saveThingRequest);
         if (response.getId() != null) {
             createAndSaveImageFromText(response.getId());
+            backToItemPanel();
         } else {
             Log.d(LOG_TAG, "Empty id");
         }
         publishProgress(false);
+    }
+
+    @UiThread
+    void backToItemPanel() {
+        getFragmentManager().beginTransaction().replace(R.id.container, new ItemPanelFragment_()).commit();
     }
 
     boolean validateInput(EditText text) {

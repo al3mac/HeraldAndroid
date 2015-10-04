@@ -84,7 +84,7 @@ public class MessagePanelFragment extends Fragment {
 
 
         final EditText input = new EditText(MessagePanelFragment.this.getActivity());
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -117,6 +117,12 @@ public class MessagePanelFragment extends Fragment {
         publishProgress(true);
         processSendMessage(message, ownedItemId);
         publishProgress(false);
+        backToItemPanel();
+    }
+
+    @UiThread
+    void backToItemPanel() {
+        getFragmentManager().beginTransaction().replace(R.id.container, new ItemPanelFragment_()).commit();
     }
 
     private void processSendMessage(String message, String ownedItemId) {

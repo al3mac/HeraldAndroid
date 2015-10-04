@@ -1,6 +1,7 @@
 package com.szwagry.heroldandroid.views;
 
 import android.content.Context;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,11 +20,15 @@ public class NavigationItemView extends LinearLayout {
     @ViewById
     TextView navigationItemName;
 
+    @ViewById
+    ImageView navItemImg;
+
     public NavigationItemView(Context context) {
         super(context);
     }
 
     public void bind(NavigationItem item) {
         navigationItemName.setText(item.getName());
+        navItemImg.setImageResource(item.getSrc());
     }
 }
